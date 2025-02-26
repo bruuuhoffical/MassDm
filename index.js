@@ -12,15 +12,11 @@ const client = new Client({
         GatewayIntentBits.DirectMessages
     ]
 });
-
-// Register commands on startup
 client.once('ready', async () => {
     console.log(`Logged in as ${client.user.tag}`);
     await registerCommands(client);
 });
 
-// Handle bot events
 handleEvents(client);
 
-// Login bot
 client.login(process.env.BOT_TOKEN);

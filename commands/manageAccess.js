@@ -4,12 +4,12 @@ const { isOwner } = require('../utils/permissions');
 
 const filePath = 'authorized.json';
 
-// Load authorized data
+
 function loadAuthorizedData() {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
-// Save authorized data
+
 function saveAuthorizedData(data) {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
 }

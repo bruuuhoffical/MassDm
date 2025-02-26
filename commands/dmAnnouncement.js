@@ -3,7 +3,7 @@ const { isOwner, isAuthorized, isChannelAllowed } = require('../utils/permission
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('dm-announcement')
+        .setName('mass_dm')
         .setDescription('Send a DM to all members in the server.')
         .addStringOption(option =>
             option.setName('message')
@@ -53,7 +53,7 @@ module.exports = {
             }
         }
 
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ flags: 64 });
 
         const members = await guild.members.fetch();
         let count = 0;
@@ -81,17 +81,17 @@ module.exports = {
             }
         }
 
-        // Log to the specified channel
+    
         const logChannel = await guild.channels.fetch(logChannelId);
         if (logChannel) {
             const logEmbed = new EmbedBuilder()
-                .setTitle(`# BRUUUH DM BOT (${new Date().toLocaleString()})`)
+                .setTitle(`BRUUUH DM BOT (${new Date().toLocaleString()})`)
                 .setDescription(logMessages.join('\n'))
                 .setColor(0xff0000);
 
             await logChannel.send({ embeds: [logEmbed] });
         }
 
-        await interaction.editReply({ content: `DM sent to ${count} members.` });
+        await interaction.editReply({ content: `Direct Messages sent to ${count} 'dm-announcement'` });
     }
 };
